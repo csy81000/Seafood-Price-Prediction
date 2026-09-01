@@ -95,11 +95,3 @@ seafood-price-prediction/
 ├─ train.py                 # 공통 학습·평가 CLI
 └─ requirements.txt
 ```
-
-
-## Notes
-
-- `models/legacy-tuned/`는 당시 학습한 9개 심화 모델을 보존한 폴더입니다.
-- `models/legacy-baseline-partial/`에는 남아 있던 기본 모델 2개를 보존했습니다.
-- legacy 모델 학습 당시의 scaler 파일은 남아 있지 않아 독립적인 재추론에는 제약이 있습니다. 새 `train.py`는 이 문제를 막기 위해 모델과 scaler를 함께 저장합니다.
-- 데이터의 시계열 순서를 이용하는 모델이 아니라 행 단위 회귀 모델이며, 학습 데이터는 고정 seed로 섞습니다.
