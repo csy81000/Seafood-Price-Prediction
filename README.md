@@ -21,6 +21,26 @@
 
 각 모델은 평균 기압, 상대습도, 기온, 수온, 유의 파고와 해당 품목의 어획량을 입력으로 사용합니다. 단가가 0 이하이거나 결측값이 있는 행은 품목별 학습·평가에서 제외합니다.
 
+## Dataset overview
+
+학습 데이터는 날짜별 날씨, 품목별 어획량과 단가를 결합해 구성했습니다.
+
+### 전체 데이터 구성
+
+![전체 데이터 구성](docs/images/combined-data.png)
+
+### 날씨 데이터
+
+![평균 기압, 습도, 기온, 수온 및 유의 파고 데이터](docs/images/weather-data.png)
+
+### 어획량 데이터
+
+![수산물 품목별 어획량 데이터](docs/images/catch-data.png)
+
+### 단가 데이터
+
+![수산물 품목별 단가 데이터](docs/images/price-data.png)
+
 ## Model presets
 
 | preset | hidden layers | dropout | epochs | batch size |
@@ -75,3 +95,11 @@ seafood-price-prediction/
 ├─ train.py                 # 공통 학습·평가 CLI
 └─ requirements.txt
 ```
+
+
+## Notes
+
+- `models/legacy-tuned/`는 당시 학습한 9개 심화 모델을 보존한 폴더입니다.
+- `models/legacy-baseline-partial/`에는 남아 있던 기본 모델 2개를 보존했습니다.
+- legacy 모델 학습 당시의 scaler 파일은 남아 있지 않아 독립적인 재추론에는 제약이 있습니다. 새 `train.py`는 이 문제를 막기 위해 모델과 scaler를 함께 저장합니다.
+- 데이터의 시계열 순서를 이용하는 모델이 아니라 행 단위 회귀 모델이며, 학습 데이터는 고정 seed로 섞습니다.
